@@ -1,0 +1,44 @@
+'''Implementation of Merge sort'''
+
+def Merge(arr1, arr2):
+    i = j = 0
+    temp = []     # To copy the element
+
+    # Copy element to temp
+    while i < len(arr1) and j < len(arr2):
+        if arr1[i] <= arr2[j]:
+            temp.append(arr1[i])
+            i += 1
+        else:
+            temp.append(arr2[j])
+            j += 1
+
+    while i < len(arr1):
+        temp.append(arr1[i])
+        i += 1
+
+    while j < len(arr2):
+        temp.append(arr2[j])
+        j += 1
+
+    return temp
+
+
+# Merge Sort Function
+
+def mergeSort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    mid = int(len(arr)/2)      # finding mid element
+    Left = arr[:mid]           # Array element dividing   
+    Right = arr[mid:]          # into 2 parts
+    Left = mergeSort(Left)     # Sorting half element 
+    Right = mergeSort(Right)   # Sorting another half
+
+    return Merge(Left, Right)
+
+
+Arr = [12, 10, 11, 25, 75, 765]
+print(f"Before Sorting : {Arr}")
+print(f"After Sorting  : {mergeSort(Arr)}")
