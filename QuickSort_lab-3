@@ -1,0 +1,40 @@
+'''Implement Quick Sort algorithm with all the necessary functions.'''
+
+def partition(arr, low, high):
+
+    # choosing rightmost element as pivot   
+    pivot = arr[low]  
+    i, j = low + 1 , high
+    
+    while i <= j :          # comparing each element
+
+        if arr[j] < pivot and arr[i] > pivot: 
+            arr[j],arr[i] = arr[i],arr[j]   # swap 
+            
+        if not arr[i] > pivot: 
+            i += 1
+        
+        if not arr[j] < pivot:
+            j -= 1
+    
+    arr[low], arr[j] = arr[j], arr[low]  # swaping the pivot element
+    
+    return j  # returning index
+
+
+def QuickSort(array, low, high):
+    
+    if low < high:  
+        partition_index = partition(array, low, high)
+
+        # Recursive call to sort the left subarray of the pivot.
+        QuickSort(array, low, partition_index - 1) 
+
+        # Recursive call to sort the Right subarray of the pivot. 
+        QuickSort(array, partition_index + 1, high) 
+
+
+array = [34, 43, 36, 23, 78, 12]
+print(f"Unsorted array : {array}")
+QuickSort(array, 0, len(array) - 1)
+print(f" Sorted  array : {array}")
