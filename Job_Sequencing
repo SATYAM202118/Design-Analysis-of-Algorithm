@@ -1,0 +1,36 @@
+class Job:
+    def __init__(self, JobId, dl, profit):
+        self.JobId = JobId
+        self.dl = dl
+        self.profit = profit
+ 
+ 
+# Function to schedule jobs to maximize profit
+def JobSequence(jobs, Mx_dl):
+    profit = 0
+    slot = [-1] * Mx_dl
+ 
+    # arrange jobs in decreasing order of their profits
+    jobs.sort(key = lambda x:x.profit, reverse = True)
+ 
+    for job in jobs:
+        for j in reversed(range(int(job.dl))):
+            if j < Mx_dl and slot[j] == -1:
+                slot[j] = job.JobId
+                profit += job.profit
+                break
+ 
+    print(f"Scheduled jobs: {list(filter(lambda x: x != -1, slot))}")
+    print(f"Total Profit  : {profit}")
+
+
+if __name__ == '__main__':
+ 
+    # List of given jobs, each job has Job_Id, deadline, and profit
+    jobs = [ Job(1, 10, 100), Job(2, 20, 20), Job(3, 30, 30), Job(4, 40, 4), 
+             Job(5, 50, 5000), Job(6, 60, 600), Job(7, 70, 7000) ]
+             
+    # stores the maximum deadline that can be associated with a job
+    Mx_dl = 15
+    
+    JobSequence(jobs, Mx_dl)
