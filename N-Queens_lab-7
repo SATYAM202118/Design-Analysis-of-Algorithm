@@ -4,7 +4,7 @@ def Display(board):
     for i in range(N):
         for j in range(N):
             print(board[i][j], end=' ')
-        print('\n')
+        print()
 
 def isSafe(board, row, col):
     # For checking row on left side
